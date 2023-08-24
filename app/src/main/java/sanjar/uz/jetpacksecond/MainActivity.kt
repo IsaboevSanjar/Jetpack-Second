@@ -9,12 +9,14 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -100,14 +102,47 @@ fun AlignYourBodyElement(
     }
 }
 
+@Composable
+fun FavouriteCollectionCard(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
+    modifier: Modifier=Modifier
+) {
+    Surface(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant
+    ) {
+        Row(
+            modifier = Modifier.width(288.dp),
+            verticalAlignment = Alignment.CenterVertically
+        )
+        {
+            Image(
+                painter = painterResource(id = drawable),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(80.dp)
+            )
+            Text(text = stringResource(id = text),
+                modifier = Modifier.padding(horizontal = 16.dp))
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     JetPackSecondTheme {
-        AlignYourBodyElement(
+        FavouriteCollectionCard(
+            modifier = Modifier.padding(8.dp),
+            text = R.string.fc2_nature_meditations,
+            drawable = R.drawable.example_pic
+        )
+        /*AlignYourBodyElement(
             modifier = Modifier,
             text = R.string.ab1_inversions,
             drawable = R.drawable.example_pic
-        )
+        )*/
     }
 }
