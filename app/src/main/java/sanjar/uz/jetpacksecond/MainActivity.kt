@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -110,7 +111,6 @@ fun AlignYourBodyElement(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun AlignYourBodyRow(modifier: Modifier = Modifier) {
     LazyRow(
@@ -153,7 +153,6 @@ fun FavouriteCollectionCard(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun FavouriteCollectionGrid(modifier: Modifier = Modifier) {
     LazyHorizontalGrid(
@@ -169,7 +168,48 @@ fun FavouriteCollectionGrid(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun HomeSection(
+    @StringRes title: Int,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(modifier = modifier) {
+        Text(
+            text = stringResource(id = title),
+            modifier = Modifier
+                .paddingFromBaseline(top = 40.dp, bottom = 16.dp)
+                .padding(horizontal = 16.dp)
+        )
+        content()
+    }
 
+}
+
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Spacer(modifier = Modifier.height(16.dp))
+        SearchBar(modifier = Modifier.padding(horizontal = 16.dp))
+        HomeSection(title = R.string.align_your_body) {
+            AlignYourBodyRow()
+        }
+        HomeSection(title = R.string.favorite_collections) {
+            FavouriteCollectionGrid()
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+    }
+}
+
+
+@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+@Composable
+fun HomeSectionPreview() {
+    JetPackSecondTheme {
+        HomeScreen()
+    }
+}
 
 private val alignYourBodyData = listOf(
     R.drawable.example_pic to R.string.ab1_inversions,
