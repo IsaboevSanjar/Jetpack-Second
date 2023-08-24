@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -109,7 +110,8 @@ fun AlignYourBodyElement(
     }
 }
 
-/*@Composable
+@Preview(showBackground = true)
+@Composable
 fun AlignYourBodyRow(modifier: Modifier = Modifier) {
     LazyRow(
         modifier = modifier, horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -119,7 +121,7 @@ fun AlignYourBodyRow(modifier: Modifier = Modifier) {
             AlignYourBodyElement(drawable = item.drawable, text = item.text, modifier = Modifier)
         }
     }
-}*/
+}
 
 @Composable
 fun FavouriteCollectionCard(
@@ -151,6 +153,7 @@ fun FavouriteCollectionCard(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun FavouriteCollectionGrid(modifier: Modifier = Modifier) {
     LazyHorizontalGrid(
@@ -160,25 +163,34 @@ fun FavouriteCollectionGrid(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        /*items(favoriteCollectionsData) { item ->
-            FavoriteCollectionCard(item.drawable, item.text)
-        }*/
+        items(favoriteCollectionsData) { item ->
+            FavouriteCollectionCard(item.drawable, item.text)
+        }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    JetPackSecondTheme {
-        FavouriteCollectionCard(
-            modifier = Modifier.padding(8.dp),
-            text = R.string.fc2_nature_meditations,
-            drawable = R.drawable.example_pic
-        )
-        /*AlignYourBodyElement(
-            modifier = Modifier,
-            text = R.string.ab1_inversions,
-            drawable = R.drawable.example_pic
-        )*/
-    }
-}
+
+
+private val alignYourBodyData = listOf(
+    R.drawable.example_pic to R.string.ab1_inversions,
+    R.drawable.example_pic to R.string.ab2_quick_yoga,
+    R.drawable.example_pic to R.string.ab3_stretching,
+    R.drawable.example_pic to R.string.ab4_tabata,
+    R.drawable.example_pic to R.string.ab5_hiit,
+    R.drawable.example_pic to R.string.ab6_pre_natal_yoga
+).map { DrawableStringPair(it.first, it.second) }
+
+private val favoriteCollectionsData = listOf(
+    R.drawable.example_pic to R.string.fc1_short_mantras,
+    R.drawable.example_pic to R.string.fc2_nature_meditations,
+    R.drawable.example_pic to R.string.fc3_stress_and_anxiety,
+    R.drawable.example_pic to R.string.fc4_self_massage,
+    R.drawable.example_pic to R.string.fc5_overwhelmed,
+    R.drawable.example_pic to R.string.fc6_nightly_wind_down
+).map { DrawableStringPair(it.first, it.second) }
+
+
+private data class DrawableStringPair(
+    @DrawableRes val drawable: Int,
+    @StringRes val text: Int
+)
