@@ -38,6 +38,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -68,7 +69,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp(modifier: Modifier = Modifier) {
-    SearchBar(modifier.fillMaxWidth())
+    MySoothAppPortrait()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -216,7 +217,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
     ) {
         NavigationBarItem(selected = true,
             label = { Text(text = stringResource(id = R.string.bottom_navigation_home)) },
-            onClick = { /*TODO*/ },
+            onClick = { },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
@@ -225,7 +226,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
             })
         NavigationBarItem(selected = false,
             label = { Text(text = stringResource(id = R.string.bottom_navigation_profile)) },
-            onClick = { /*TODO*/ },
+            onClick = { },
             icon = {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
@@ -235,12 +236,20 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun MySoothAppPortrait() {
+    JetPackSecondTheme {
+        Scaffold(bottomBar = { SootheBottomNavigation() }) { padding ->
+            HomeScreen(Modifier.padding(padding))
+        }
+    }
+}
 
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun HomeSectionPreview() {
     JetPackSecondTheme {
-        SootheBottomNavigation()
+        MySoothAppPortrait()
     }
 }
 
